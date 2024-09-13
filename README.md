@@ -1,6 +1,7 @@
 # MultiThreadDownloader
 
-MultiThreadDownloader is a Python library for downloading files in segments using multithreading. This approach speeds up the download process by leveraging multiple threads to download different parts of a file simultaneously.
+MultiThreadDownloader is a Python script that allows you to download files in segments using multithreading. 
+This approach speeds up the download process by leveraging multiple threads to download different parts of a file simultaneously.
 
 ## Features
 
