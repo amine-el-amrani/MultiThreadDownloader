@@ -11,7 +11,7 @@ class MultiThreadDownloader:
 
     def download_segment(self, start, end, segment_number):
         headers = {'Range': f'bytes={start}-{end}'}
-        response = requests.get(self.url, headers=headers, stream=True)
+        response = requests.get(self.url, headers=headers, stream=True, timeout=60)
         segment_path = os.path.join(self.output_dir, f'segment_{segment_number}')
         
         with open(segment_path, 'wb') as file:
@@ -29,7 +29,7 @@ class MultiThreadDownloader:
 
     def download(self):
         os.makedirs(self.output_dir, exist_ok=True)
-        response = requests.head(self.url)
+        response = requests.head(self.url, timeout=60)
         file_size = int(response.headers.get('Content-Length', 0))
         segment_size = file_size // self.num_threads
         
