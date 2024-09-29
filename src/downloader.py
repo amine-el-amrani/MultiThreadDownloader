@@ -1,6 +1,7 @@
 import os
 import requests
 from concurrent.futures import ThreadPoolExecutor
+from security import safe_requests
 
 class MultiThreadDownloader:
     def __init__(self, url, output_file, num_threads=4):
@@ -11,7 +12,7 @@ class MultiThreadDownloader:
 
     def download_segment(self, start, end, segment_number):
         headers = {'Range': f'bytes={start}-{end}'}
-        response = requests.get(self.url, headers=headers, stream=True, timeout=60)
+        response = safe_requests.get(self.url, headers=headers, stream=True, timeout=60)
         segment_path = os.path.join(self.output_dir, f'segment_{segment_number}')
         
         with open(segment_path, 'wb') as file:
